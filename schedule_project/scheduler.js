@@ -47,12 +47,22 @@ function findMonth(){
   return date.getMonth();
 }
 
+let firstMonth = findMonth();
+let monthCounter = firstMonth;
+
 function nextMonth(){
   clearCalendar();
-  let currentMonth = findMonth();
-  nextMonth = currentMonth + 2;
-  console.log(nextMonth);
-  createDay(nextMonth);
+
+  let currentMonth = monthCounter;
+  let nextMonth = 0;
+  if(currentMonth == 0){
+    nextMonth = currentMonth + 2;
+  }else{
+  nextMonth = currentMonth + 1;
+  }
+  monthCounter = nextMonth;
+  console.log(monthCounter)
+  createDay(nextMonth)
   return;
 }
 
