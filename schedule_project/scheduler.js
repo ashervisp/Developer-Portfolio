@@ -2,12 +2,12 @@
 const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 //Changes the title to the current month
-function findTitle(){
+function findTitle(month){
   let day = new Date();
   let currentTitle = document.querySelector('#title');
 
   console.log(currentTitle);
-  currentTitle.innerHTML = months[day.getMonth()] + ' ' +  day.getFullYear() + ': ';
+  currentTitle.innerHTML = months[month] + ' ' +  day.getFullYear() + ': ';
 }
 
 //Places the day number in the calendar
@@ -17,8 +17,8 @@ function createDay(x) {
   let firstDay = new Date(date.getFullYear(),x,1);
   console.log(x);
   console.log(date.getMonth())
-  console.log(daysInMonth(x,2021))
-  for(let i = 0; i < daysInMonth(x,2021);i++){
+  console.log(daysInMonth(x+1,2021))
+  for(let i = 0; i < daysInMonth(x+1,2021);i++){
     dateNumber[firstDay.getDay()+i].innerHTML = i+1;
   }
 }
@@ -47,22 +47,46 @@ function findMonth(){
   return date.getMonth();
 }
 
+let greenDays = []
+
+function storeDoneTasks(){
+  let dateNumber = document.querySelectorAll('.day');
+
+  for(let i = 0;i  < 42; i++){
+    if(dateNumber[i].style.backgroundColor == 'green'){
+      greenDays.push(1);
+    }else greenDays.push(0);
+  }
+
+  console.log(greenDays)
+}
+
 let firstMonth = findMonth();
 let monthCounter = firstMonth;
 
+//Changes the month dates
 function nextMonth(){
+  storeDoneTasks();
   clearCalendar();
-
-  let currentMonth = monthCounter;
-  let nextMonth = 0;
-  if(currentMonth == 0){
-    nextMonth = currentMonth + 2;
-  }else{
-  nextMonth = currentMonth + 1;
+  monthCounter++;
+  console.log(monthCounter);
+  createDay(monthCounter)
+  if(monthCounter > 11){
+    monthCounter = 0;
   }
-  monthCounter = nextMonth;
-  console.log(monthCounter)
-  createDay(nextMonth)
+  findTitle(monthCounter)
+
+  return;
+}
+
+function prevMonth(){
+  clearCalendar();
+  monthCounter--;
+  createDay(monthCounter);
+  if(monthCounter < 0){
+    monthCounter = 11
+  }
+  findTitle(monthCounter);
   return;
 }
 
@@ -70,9 +94,14 @@ function clearCalendar(){
     let dateNumber = document.querySelectorAll('.day');
     for(let i = 0; i < 42; i++){
       dateNumber[i].innerHTML = '';
+      dateNumber[i].style.backgroundColor = 'white';
     }
+    let nextTitle = document.querySelector('#title');
+    nextTitle.innerHTML = '';
     return;
 }
 
+
+
 createDay(findMonth());
-findTitle();
+findTitle(findMonth());
