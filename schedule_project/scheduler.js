@@ -7,10 +7,11 @@ let checkMonth = 0
 let day = new Date();
 let currYear = day.getFullYear()
 let storeTitle= ''
+let calendarData={};
 let dateData = {};
 //Changes the title to the current month
 function findTitle(month){
-  let currentTitle = document.querySelector('#title');
+  let currentTitle = document.querySelector('.title');
   console.log(checkMonth)
   console.log(month)
   if(checkMonth == 11 && month == 0){
@@ -122,9 +123,15 @@ function clearCalendar(){
       dateNumber[i].innerHTML = '';
       dateNumber[i].style.backgroundColor = 'white';
     }
-    let nextTitle = document.querySelector('#title');
+    let nextTitle = document.querySelector('.title');
     nextTitle.innerHTML = '';
     return;
+}
+
+function createNewMonth(){
+  let newMonth = document.querySelector('li');
+  let cln = newMonth.cloneNode(true);
+  document.querySelector('ul').appendChild(cln);
 }
 
 createDay(findMonth());

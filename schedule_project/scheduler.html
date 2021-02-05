@@ -7,15 +7,22 @@
 
   </head>
   <body>
+<!--    <button type = 'button' onclick = 'createNewMonth()'> New</button> -->
+    <ul>
+      <li>
+        <table class = 'top'>
+        <tr>
+          <td><button class= 'btn' type = 'button' onclick = 'prevMonth()'> < </button> </td>
+          <td class = 'title'> </td>
+          <td><input id = 'task' type = 'text'> </input></td>
+          <td><button class = 'btn' type = 'button' onclick = 'nextMonth()'> > </button></td>
+          <button type = 'button' onclick = 'createNewMonth()'> New</button>
+        </tr>
+      </table>
     <table class='calendar'>
-      <div>
-      <button type = 'button' onclick = 'prevMonth()'> Prev </button>
-      <span id = 'title'> </span>
-      <input id = 'task' type = 'text'> </input>
-      <button type = 'button' onclick = 'nextMonth()'> Next </button>
+
     </div>
-      <tr>
-      </tr>
+
       <tr id = 'dayNames'>
       <td>Sun</td>
       <td>Mon</td>
@@ -79,8 +86,9 @@
       <td class = 'day' onclick ='taskDone(this);' ></td>
       <td class = 'day' onclick ='taskDone(this);' ></td>
     </tr>
-
     </table>
+  </li>
+</ul>
 <script src = 'scheduler.js'> </script>
   </body>
 </html>
